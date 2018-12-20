@@ -2,17 +2,18 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
-    @model AspNetCoreVideo.ViewModels.VideoViewModel
+    @model AspNetCoreVideo.ViewModels.VideoViewModel;
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <title>Video</title>
-</head>
-<body>
-    <div>Id: @Model.Id</div>
-    <div>Title: @Model.Title</div>
-    <div>Genre: @Model.Genre</div>
-    <div>@Html.ActionLink("Go Back", "Index")</div>
-</body>
-</html>
+
+
+<div>Id: @Model.Id</div>
+<div>Title: @Model.Title</div>
+<div>Genre: @Model.Genre</div>
+<div>@Html.ActionLink("Go Back", "Index")</div>
+
+@section footer{
+    <div>This is the Details footer</div>
+}

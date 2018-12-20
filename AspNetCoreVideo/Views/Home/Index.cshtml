@@ -2,13 +2,11 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
-    @model IEnumerable<AspNetCoreVideo.ViewModels.VideoViewModel>
+    @model IEnumerable<AspNetCoreVideo.ViewModels.VideoViewModel>;
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <title>Video</title>
-</head>
-<body>
+
     <table>
         @foreach (var video in Model)
         {
@@ -19,5 +17,7 @@
             </tr>
         }
     </table>
-</body>
-</html>
+
+@section footer{ 
+    <div>This is the Index footer</div>
+}
