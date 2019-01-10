@@ -35,5 +35,10 @@ namespace AspNetCoreVideo.Services
             newVideo.Id = _videos.Max(v => v.Id) + 1; // Since new videos do not yet have an id, we have to make one somehow.  Find max id out of existing videos, add one to that, thats the new id.
             _videos.Add(newVideo);
         }
+
+        public int Commit()
+        {
+            return 0;
+        }
     }
 }

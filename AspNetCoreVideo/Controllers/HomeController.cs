@@ -52,21 +52,49 @@ namespace AspNetCoreVideo.Controllers
             return View();
         }
 
+        // During HTTP POST, a POST version of the action method is called with the form values
+        // The names of the form controls are matched against the model properties or parameters available in the action's parameter list
+        // POST action then uses that data to create, update, or delete data in the data source.
+        // By default, MVC matches all properties in the form with properties in the model which is risky because you don't always want all data the form sends
+        // Having a separate ViewModel bypasses this.
+
         [HttpPost]
-        public IActionResult Create(VideoEditViewModel model)
+        public IActionResult Create(VideoEditViewModel model) // using VideoEditViewModel as the model to base the fields for the form on
         {
             if (ModelState.IsValid)
             { 
-                var video = new Video
+                var video = new Video // Here we match the form inputs to the respective properties in the ViewModel
                 {
                     Title = model.Title,
                     Genre = model.Genre
                 };
                 _videos.Add(video);
+                _videos.Commit();
                 return RedirectToAction("Details", new { id = video.Id });
             }
 
             return View();
+        }
+
+        [HttpGet] // The HTTP GET takes place when the video has not yet been edited/before pressing edit.
+        public IActionResult Edit(int id)
+        {
+            var video = _videos.Get(id); // Get the id of the video that is being edited.
+            if (video == null) // if the video doesn't exist, return to index.
+                return RedirectToAction("Index");
+            return View(video); // Show the current details of the video.
+        }
+
+        [HttpPost] // The HTTP POST takes place after the video has been edited/after pressing edit.
+        public IActionResult Edit(int id, VideoEditViewModel model)
+        {
+            var video = _videos.Get(id); // Get the id of the video that is being edited.
+            if (video == null || !ModelState.IsValid) // If the video doesn't exist or is invalid, simply show the old details of the video.
+                return View(model);
+            video.Title = model.Title; // Assign the input title from the ViewModel to the video.
+            video.Genre = model.Genre; // Assign the input genre from the ViewModel to the video.
+            _videos.Commit();
+            return RedirectToAction("Details", new { id = video.Id });
         }
 
     }

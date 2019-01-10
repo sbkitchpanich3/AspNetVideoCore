@@ -11,5 +11,6 @@ namespace AspNetCoreVideo.Services
         IEnumerable<Video> GetAll();
         Video Get(int id); // Makes it possible to retrieve a video by ID.
         void Add(Video newVideo);
+        int Commit();
     }
 }

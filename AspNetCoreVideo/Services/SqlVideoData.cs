@@ -18,8 +18,7 @@ namespace AspNetCoreVideo.Services
 
         public void Add(Video newVideo)
         {
-            _db.Add(newVideo);
-            _db.SaveChanges();
+            _db.Add(newVideo); //Add() is a library function and differs from the Add method that we have created here.
         }
 
         public Video Get(int id)
@@ -30,6 +29,11 @@ namespace AspNetCoreVideo.Services
         public IEnumerable<Video> GetAll()
         {
             return _db.Videos;
+        }
+
+        public int Commit()
+        {
+            return _db.SaveChanges();
         }
     }
 }
