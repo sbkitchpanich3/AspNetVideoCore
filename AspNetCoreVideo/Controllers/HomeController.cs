@@ -5,9 +5,11 @@ using System;
 using AspNetCoreVideo.Models;
 using AspNetCoreVideo.ViewModels;
 using AspNetCoreVideo.Entities;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AspNetCoreVideo.Controllers
 {
+    [Authorize]
     public class HomeController : Controller  // inherit controller class to use IEnumerable
     {
         private IVideoData _videos;  //holds the data fetched from the service.  IVideoData is the interface that was created
@@ -17,7 +19,7 @@ namespace AspNetCoreVideo.Controllers
             _videos = videos;  // makes the video service available throughout the controller via injection
         }
 
-
+        [AllowAnonymous]
         public ViewResult Index()
         {
             // converts each video into a VideoViewModel object, stored into the model field which is passed to the view.

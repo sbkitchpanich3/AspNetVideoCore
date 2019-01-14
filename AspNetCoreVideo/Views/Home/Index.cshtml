@@ -3,20 +3,11 @@
     ViewBag.Title = "Home";
 }
 
-    <table>
-        @foreach (var video in Model)
-        {
-        <tr>
-            <td>@video.Title</td>
-            <td>@video.Genre</td>
-            <td><a asp-action="Details" asp-route-id="@video.Id">Details</a></td> <!-- argument: label, controller, route-->
-            <td><a asp-action="Edit" asp-route-id="@video.Id">Edit</a></td>
-        </tr>
-        }
-    </table>
+    @foreach (var video in Model)
+    {
+        @Html.Partial("_Video", video);
+    }
 
-<a asp-action="Create">Create</a>
-
-@section footer{ 
-    <div>This is the Index footer</div>
-}
+<div>
+    <a asp-action="Create">Create</a>
+</div>

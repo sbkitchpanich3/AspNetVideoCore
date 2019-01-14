@@ -11,6 +11,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using AspNetCoreVideo.Entities;
+using Microsoft.AspNetCore.Identity;
 
 namespace AspNetCoreVideo
 {
@@ -31,6 +33,7 @@ namespace AspNetCoreVideo
         {
             var conn = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<VideoDbContext>(options => options.UseSqlServer(conn));
+            services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<VideoDbContext>(); // handles creation and validation of users against the database
             services.AddMvc();
             services.AddSingleton(provider => Configuration);
             services.AddSingleton<IMessageService, ConfigurationMessageService>();
@@ -45,6 +48,8 @@ namespace AspNetCoreVideo
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseAuthentication(); // Install identity middleware components
 
             app.UseMvc(routes =>
            {
