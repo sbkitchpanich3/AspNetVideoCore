@@ -51,6 +51,8 @@ namespace AspNetCoreVideo
 
             app.UseAuthentication(); // Install identity middleware components
 
+            app.UseStaticFiles();
+
             app.UseMvc(routes =>
            {
                routes.MapRoute(
