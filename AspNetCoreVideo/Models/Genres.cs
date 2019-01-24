@@ -15,3 +15,5 @@ namespace AspNetCoreVideo.Models
         Action
     }
 }
+
+// This is not the same as an "entity."  The model is responsible for letting the genres be a set of choices in this case, rather than having the user explicitly define every genre.

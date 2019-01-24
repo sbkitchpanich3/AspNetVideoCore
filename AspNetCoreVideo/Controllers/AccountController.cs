@@ -12,6 +12,9 @@ namespace AspNetCoreVideo.Controllers
 {
     public class AccountController : Controller
     {
+
+        // Injecting signInManager and userManager.
+
         private UserManager<User> _userManager;
         private SignInManager<User> _signInManager;
 
@@ -49,6 +52,8 @@ namespace AspNetCoreVideo.Controllers
             }
             return View();
         }
+
+        // returnUrl saves the current URL from when you tried to reach a page that requires you to be logged in, while you weren't logged in.
 
         [HttpGet]
         public IActionResult Login(string returnUrl = "")
